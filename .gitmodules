@@ -1,3 +1,6 @@
-[submodule "libs/STM32FreeRTOS"]
-	path = libs/STM32FreeRTOS
+[submodule "FreeRTOS/STM32FreeRTOS"]
+	path = FreeRTOS/STM32FreeRTOS
 	url = https://github.com/stm32duino/STM32FreeRTOS.git
+[submodule "drvs/Hydrodrivers"]
+	path = drvs/Hydrodrivers
+	url = https://github.com/SeaJackal/Hydrodrivers.git
