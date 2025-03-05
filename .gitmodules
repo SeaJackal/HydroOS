@@ -4,3 +4,6 @@
 [submodule "drvs/Hydrodrivers"]
 	path = drvs/Hydrodrivers
 	url = https://github.com/SeaJackal/Hydrodrivers.git
+[submodule "Hydrolib-soft"]
+	path = Hydrolib-soft
+	url = https://github.com/SeaJackal/Hydrolib-soft.git
