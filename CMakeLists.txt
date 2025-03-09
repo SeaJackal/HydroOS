@@ -1,4 +1,4 @@
-add_subdirectory(drvs/Hydrodrivers Hydrodrivers)
+add_subdirectory(Hydrodrivers)
 add_subdirectory(FreeRTOS)
 add_subdirectory(Hydrolib-soft)
 add_subdirectory(hydros_serial_protocol)
