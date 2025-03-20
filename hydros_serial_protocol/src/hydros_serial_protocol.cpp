@@ -5,7 +5,6 @@
 extern "C"
 {
     void MainTask(void *argument);
-    void TxTask(void *argument);
 }
 
 namespace hydros::serialProtocol

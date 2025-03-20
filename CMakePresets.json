@@ -1,0 +1,18 @@
+{
+    "version": 6,
+    "configurePresets": [
+        {
+            "name": "dry-run",
+            "displayName": "Dry run",
+            "description": "test building for STM32F407",
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "/usr/bin/arm-none-eabi-gcc",
+                "CMAKE_CXX_COMPILER": "/usr/bin/arm-none-eabi-g++",
+                "CMAKE_ASM_COMPILER": "/usr/bin/arm-none-eabi-gcc",
+                "DRY_RUN": "ON",
+                "BUILD_TESTING": "OFF"
+            }
+        }
+    ]
+}
