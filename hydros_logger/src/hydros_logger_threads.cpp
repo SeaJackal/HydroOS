@@ -6,8 +6,8 @@ extern "C"
 {
     void UARTloggerTask(void *argument)
     {
-        LoggerModule::UARTloggerQueue *handler =
-            static_cast<LoggerModule::UARTloggerQueue *>(argument);
+        LoggerModule::UARTloggerStream *handler =
+            static_cast<LoggerModule::UARTloggerStream *>(argument);
         handler->ThreadHandler();
     }
 }

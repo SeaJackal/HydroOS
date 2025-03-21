@@ -6,7 +6,10 @@
 #include "cmsis_os.h"
 
 #include "hydrolib_logger.hpp"
+extern "C"
+{
 #include "hydrv_uart.h"
+}
 
 namespace hydros::logger
 {
@@ -15,10 +18,11 @@ namespace hydros::logger
     class LoggerModule
     {
     public:
-        class UARTloggerQueue : public LogDistributor::SubscriberQueueInterface
+    public:
+        class UARTloggerStream : public LogDistributor::SubscriberQueueInterface
         {
         public:
-            UARTloggerQueue(USART_TypeDef *USARTx, osPriority_t thread_priority);
+            UARTloggerStream(USART_TypeDef *USARTx, osPriority_t thread_priority);
 
         public:
             hydrolib_ReturnCode Push(Logger::Log &log) override;
@@ -35,13 +39,13 @@ namespace hydros::logger
         };
 
     public:
-        LoggerModule(USART_TypeDef *USARTx, osPriority_t thread_priority);
+        LoggerModule();
 
     public:
-        LogDistributor *GetDistributor();
+        LogDistributor &GetDistributor();
+        void AddUARTstreams(UARTloggerStream& UART_stream);
 
     private:
-        UARTloggerQueue queue_;
         LogDistributor distributor_;
     };
 }

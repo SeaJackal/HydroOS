@@ -7,14 +7,15 @@ extern "C"
 
 namespace hydros::logger
 {
-    LoggerModule::UARTloggerQueue::UARTloggerQueue(USART_TypeDef *USARTx,
-                                                   osPriority_t thread_priority)
+    LoggerModule::UARTloggerStream::UARTloggerStream(USART_TypeDef *USARTx,
+                                                     osPriority_t thread_priority)
         : USARTx_(USARTx),
           translator_()
     {
+
         queue_ = osMessageQueueNew(10, sizeof(Logger::Log), nullptr);
-        translator_.SetFormatString("[%s] [%l] %m\n");
-        tx_completed_ = osSemaphoreNew(1, 1, nullptr);
+        translator_.SetFormatString("[%s] [%l] %m\n\r");
+        tx_completed_ = osSemaphoreNew(1, 0, nullptr);
 
         osThreadAttr_t thread_attributes = {
             .name = "SerialProtocolMainThread",
@@ -24,16 +25,25 @@ namespace hydros::logger
         thread_handler_ = osThreadNew(UARTloggerTask, this, &thread_attributes);
     }
 
-    void LoggerModule::UARTloggerQueue::ThreadHandler()
+    hydrolib_ReturnCode LoggerModule::UARTloggerStream::Push(Logger::Log &log)
     {
-        Logger::Log translated_log;
-        osMessageQueueGet(queue_, &translated_log, nullptr, osWaitForever);
-        translator_.StartTranslatingToBytes(translated_log);
-        hydrv_UART_enableTxInterruption(USARTx_);
-        osStatus_t ret = osSemaphoreAcquire(tx_completed_, osWaitForever);
+        osMessageQueuePut(queue_, &log, 0, osWaitForever);
+        return HYDROLIB_RETURN_OK;
     }
 
-    hydrolib_ReturnCode LoggerModule::UARTloggerQueue::TransmitByte()
+    void LoggerModule::UARTloggerStream::ThreadHandler()
+    {
+        while (1)
+        {
+            Logger::Log translated_log;
+            osMessageQueueGet(queue_, &translated_log, nullptr, osWaitForever);
+            translator_.StartTranslatingToBytes(translated_log);
+            hydrv_UART_enableTxInterruption(USARTx_);
+            osStatus_t ret = osSemaphoreAcquire(tx_completed_, osWaitForever);
+        }
+    }
+
+    hydrolib_ReturnCode LoggerModule::UARTloggerStream::TransmitByte()
     {
         uint8_t byte;
         int32_t res = translator_.DoTranslation(reinterpret_cast<char *>(&byte), 1);
@@ -45,15 +55,18 @@ namespace hydros::logger
         hydrv_UART_Transmit(USARTx_, byte);
     }
 
-    LoggerModule::LoggerModule(USART_TypeDef *USARTx, osPriority_t thread_priority)
-        : queue_(USARTx, thread_priority),
-          distributor_()
+    LoggerModule::LoggerModule()
+        : distributor_()
     {
-        distributor_.AddSubscriber(queue_, LogLevel::DEBUG, nullptr);
     }
 
-    LogDistributor *LoggerModule::GetDistributor()
+    LogDistributor &LoggerModule::GetDistributor()
     {
-        return &distributor_;
+        return distributor_;
+    }
+
+    void LoggerModule::AddUARTstreams(UARTloggerStream &UART_stream)
+    {
+        distributor_.AddSubscriber(UART_stream, LogLevel::DEBUG, nullptr);
     }
 }

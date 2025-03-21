@@ -52,6 +52,8 @@ namespace hydros::serialProtocol
           driver_(USARTx, address, public_memory_),
           USARTx_(USARTx)
     {
+        // hydrv_UART_Init(USARTx);
+
         rx_completed_ = osSemaphoreNew(1, 0, nullptr);
 
         osThreadAttr_t main_thread_attributes = {
