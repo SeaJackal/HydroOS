@@ -7,6 +7,11 @@ extern "C"
 
 namespace hydros::logger
 {
+    LoggerModule::LoggerModule()
+        : LogDistributor()
+    {
+    }
+
     LoggerModule::UARTloggerStream::UARTloggerStream(USART_TypeDef *USARTx,
                                                      osPriority_t thread_priority)
         : USARTx_(USARTx),
@@ -53,20 +58,5 @@ namespace hydros::logger
             osSemaphoreRelease(tx_completed_);
         }
         hydrv_UART_Transmit(USARTx_, byte);
-    }
-
-    LoggerModule::LoggerModule()
-        : distributor_()
-    {
-    }
-
-    LogDistributor &LoggerModule::GetDistributor()
-    {
-        return distributor_;
-    }
-
-    void LoggerModule::AddUARTstreams(UARTloggerStream &UART_stream)
-    {
-        distributor_.AddSubscriber(UART_stream, LogLevel::DEBUG, nullptr);
     }
 }

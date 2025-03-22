@@ -15,9 +15,8 @@ namespace hydros::logger
 {
     using namespace hydrolib::Logger;
 
-    class LoggerModule
+    class LoggerModule : public LogDistributor
     {
-    public:
     public:
         class UARTloggerStream : public LogDistributor::SubscriberQueueInterface
         {
@@ -40,13 +39,6 @@ namespace hydros::logger
 
     public:
         LoggerModule();
-
-    public:
-        LogDistributor &GetDistributor();
-        void AddUARTstreams(UARTloggerStream& UART_stream);
-
-    private:
-        LogDistributor distributor_;
     };
 }
 

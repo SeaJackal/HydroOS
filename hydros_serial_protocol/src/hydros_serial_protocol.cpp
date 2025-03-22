@@ -43,7 +43,6 @@ namespace hydros::serialProtocol
     SerialProtocolModule::SerialProtocolModule(
         const char *name,
         osPriority_t main_thread_priority,
-        osPriority_t tx_thread_priority,
         USART_TypeDef *USARTx, uint8_t address,
         uint8_t *public_memory,
         uint32_t public_memory_capacity)
