@@ -33,6 +33,10 @@ if(DRY_RUN)
         -Wl,-Map=${CMAKE_CURRENT_BINARY_DIR}/STMprogramTest.map,--cref -Wl,--gc-sections)
 
     add_compile_definitions(STM32F407xx)
+else()
+    project(HydroOS VERSION 1.0)
+
+    enable_language(C CXX ASM)
 endif()
 
 add_subdirectory(Hydrodrivers)

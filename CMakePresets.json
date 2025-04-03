@@ -13,6 +13,16 @@
                 "DRY_RUN": "ON",
                 "BUILD_TESTING": "OFF"
             }
+        },
+        {
+            "name": "tests",
+            "displayName": "Building tests",
+            "description": "Building tests",
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "DRY_RUN": "OFF",
+                "BUILD_TESTING": "ON"
+            }
         }
     ]
 }
