@@ -6,10 +6,8 @@
 #include "cmsis_os.h"
 
 #include "hydrolib_logger.hpp"
-extern "C"
-{
-#include "hydrv_uart.h"
-}
+
+#include "hydrv_uart.hpp"
 
 namespace hydros::logger
 {
