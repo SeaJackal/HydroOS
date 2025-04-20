@@ -40,7 +40,11 @@ else()
 endif()
 
 add_subdirectory(Hydrodrivers)
-add_subdirectory(FreeRTOS)
 add_subdirectory(Hydrolib-soft)
-add_subdirectory(hydros_serial_protocol)
+
+if(NOT BUILD_TESTING)
+    add_subdirectory(FreeRTOS)
+    add_subdirectory(hydros_serial_protocol)
+endif()
+
 # add_subdirectory(hydros_logger)
