@@ -45,6 +45,5 @@ add_subdirectory(Hydrolib-soft)
 if(NOT BUILD_TESTING)
     add_subdirectory(FreeRTOS)
     add_subdirectory(hydros_serial_protocol)
+    add_subdirectory(hydros_uart)
 endif()
-
-# add_subdirectory(hydros_logger)
