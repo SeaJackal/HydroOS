@@ -14,7 +14,6 @@ namespace hydros
     {
     private:
         using UARTBase = UART<RX_BUFFER_CAPACITY, TX_BUFFER_CAPACITY>;
-        using UARTBase::Transmit;
 
     public:
         UARTStream(const hydrv::UART::UARTLow::UARTPreset &UART_preset,
@@ -53,7 +52,7 @@ namespace hydros
     hydrolib_ReturnCode UARTStream<RX_BUFFER_CAPACITY, TX_BUFFER_CAPACITY>::Push(
         const void *data, uint32_t data_length)
     {
-        return Transmit(data, data_length);
+        return UARTBase::Transmit(data, data_length);
     }
 
     template <int RX_BUFFER_CAPACITY, int TX_BUFFER_CAPACITY>
