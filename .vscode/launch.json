@@ -5,11 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "TestUART",
+            "name": "Cortex Debug",
             "cwd": "${workspaceFolder}",
-            "program": "${workspaceFolder}/build/Testing/TestUART",
+            "executable": "${workspaceFolder}/build/STMprogramTest.elf",
             "request": "launch",
-            "type": "cppdbg"
+            "type": "cortex-debug",
+            "runToEntryPoint": "main",
+            "servertype": "openocd",
+            "device": "stm32f4x",
+            "svdFile": "STM32F407.svd",
+            "showDevDebugOutput": "raw",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32f4x.cfg"
+            ]
         }
     ]
 }
