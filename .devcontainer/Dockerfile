@@ -20,6 +20,7 @@ RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add - \
     clangd-19 \
     openocd \
     gcc-arm-none-eabi \
+    libnewlib-arm-none-eabi \
     gdb-multiarch \
     && apt clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
