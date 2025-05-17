@@ -21,6 +21,7 @@ RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add - \
     openocd \
     gcc-arm-none-eabi \
     libnewlib-arm-none-eabi \
+    libstdc++-arm-none-eabi-newlib \
     gdb-multiarch \
     && apt clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \

@@ -41,7 +41,9 @@
                 "clangd.arguments": [
                     "--compile-commands-dir=build"
                 ],
-                "C_Cpp.intelliSenseEngine": "disabled"
+                "C_Cpp.intelliSenseEngine": "disabled",
+                "cortex-debug.armToolchainPath": "/bin", // Path to arm-none-eabi toolchain
+                "cortex-debug.gdbPath": "/bin/gdb-multiarch"
             }
         }
     }
