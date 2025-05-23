@@ -178,3 +178,8 @@ void USART3_IRQHandler(void)
 {
   UART3IRQHandler();
 }
+
+void USART1_IRQHandler(void)
+{
+  UART1IRQHandler();
+}

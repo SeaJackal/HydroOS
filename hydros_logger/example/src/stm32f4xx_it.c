@@ -176,5 +176,9 @@ void SysTick_Handler(void)
 
 void USART3_IRQHandler(void)
 {
-  UART3IRQHandler();
+  
+}
+void USART1_IRQHandler(void)
+{
+  UARTIRQHandler();
 }

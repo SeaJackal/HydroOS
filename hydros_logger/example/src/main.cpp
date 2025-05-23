@@ -39,9 +39,9 @@ const osThreadAttr_t myTask02_attributes = {
     .priority = (osPriority_t)osPriorityHigh,
 };
 
-hydrv::GPIO::GPIOLow rx_pin(hydrv::GPIO::GPIOLow::GPIOC_group, 11);
-hydrv::GPIO::GPIOLow tx_pin(hydrv::GPIO::GPIOLow::GPIOC_group, 10);
-hydros::UARTStream<255, 255> uart(hydrv::UART::UARTLow::USART3_LOW,
+hydrv::GPIO::GPIOLow rx_pin(hydrv::GPIO::GPIOLow::GPIOB_port, 7);
+hydrv::GPIO::GPIOLow tx_pin(hydrv::GPIO::GPIOLow::GPIOB_port, 6);
+hydros::UARTStream<255, 255> uart(hydrv::UART::UARTLow::USART1_LOW,
                                   rx_pin, tx_pin, 7);
 
 hydrolib::Logger::LogDistributor distributor("[%s] [%l] %m\n\r", uart);
@@ -66,7 +66,7 @@ int main(void)
 
 extern "C"
 {
-  void UART3IRQHandler()
+  void UARTIRQHandler()
   {
     uart.IRQcallback();
   }
