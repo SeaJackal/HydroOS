@@ -32,9 +32,12 @@ private:
     osMutexId_t memory_mutex_;
 
 public:
-    const uint8_t *Read(uint32_t address, uint32_t length)
+    hydrolib_ReturnCode Read(void *buffer, uint32_t address, uint32_t length)
     {
-        return public_memory_ + address;
+        osMutexAcquire(memory_mutex_, osWaitForever);
+        memcpy(buffer, public_memory_ + address, length);
+        osMutexRelease(memory_mutex_);
+        return HYDROLIB_RETURN_OK;
     }
     hydrolib_ReturnCode Write(const void *buffer, uint32_t address,
                               uint32_t length)
@@ -131,7 +134,8 @@ extern "C"
         /* Infinite loop */
         for (;;)
         {
-            uint8_t byte = *secure_buffer.Read(0, 1);
+            uint8_t byte;
+            secure_buffer.Read(&byte, 0, 1);
 
             if (byte == 'a')
             {
