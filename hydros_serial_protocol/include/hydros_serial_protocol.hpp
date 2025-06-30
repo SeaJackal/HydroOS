@@ -104,6 +104,7 @@ void UARTSlave<Memory, Distributor>::IRQCallback()
 template <PublicMemoryConcept Memory, logger::LogDistributorConcept Distributor>
 void UARTSlave<Memory, Distributor>::MainThreadHandler()
 {
+    uart_.StartRx();
     while (1)
     {
         osStatus_t ret = osSemaphoreAcquire(rx_completed_, osWaitForever);

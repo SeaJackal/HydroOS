@@ -47,4 +47,5 @@ if(NOT BUILD_TESTING)
 
     add_subdirectory(hydros_serial_protocol)
     add_subdirectory(hydros_uart)
+    add_subdirectory(hydros_vectornav)
 endif()
