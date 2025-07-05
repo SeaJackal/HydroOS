@@ -1,0 +1,17 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "arm-build",
+            "displayName": "GCC arm-none-eabi",
+            "description": "Using compilers: C = /usr/bin/arm-none-eabi-gcc, CXX = /usr/bin/arm-none-eabi-g++",
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "/usr/bin/arm-none-eabi-gcc",
+                "CMAKE_CXX_COMPILER": "/usr/bin/arm-none-eabi-g++",
+                "CMAKE_ASM_COMPILER": "/usr/bin/arm-none-eabi-gcc",
+                "BUILD_TESTING": "OFF"
+            }
+        }
+    ]
+}
