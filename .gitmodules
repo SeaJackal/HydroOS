@@ -1,9 +1,1 @@
-[submodule "FreeRTOS/STM32FreeRTOS"]
-	path = FreeRTOS/STM32FreeRTOS
-	url = https://github.com/stm32duino/STM32FreeRTOS.git
-[submodule "Hydrolib-soft"]
-	path = Hydrolib-soft
-	url = https://github.com/SeaJackal/Hydrolib-soft.git
-[submodule "Hydrodrivers"]
-	path = Hydrodrivers
-	url = https://github.com/SeaJackal/Hydrodrivers.git
+
