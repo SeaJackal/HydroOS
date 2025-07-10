@@ -39,11 +39,10 @@ else()
     enable_language(C CXX ASM)
 endif()
 
-add_subdirectory(Hydrodrivers)
-add_subdirectory(Hydrolib-soft)
+add_subdirectory(libs/Hydrodrivers Hydrodrivers)
 
 if(NOT BUILD_TESTING)
-    add_subdirectory(FreeRTOS)
+    add_subdirectory(libs/FreeRTOS FreeRTOS)
 
     add_subdirectory(hydros_serial_protocol)
     add_subdirectory(hydros_uart)
