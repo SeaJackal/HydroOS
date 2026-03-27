@@ -1,28 +1,124 @@
 {
-    "version": 6,
+    "version": 3,
     "configurePresets": [
         {
-            "name": "dry-run",
-            "displayName": "Dry run",
-            "description": "test building for STM32F407",
+            "name": "default",
+            "hidden": true,
+            "generator": "Unix Makefiles",
             "binaryDir": "${sourceDir}/build",
             "cacheVariables": {
-                "CMAKE_C_COMPILER": "/usr/bin/arm-none-eabi-gcc",
-                "CMAKE_CXX_COMPILER": "/usr/bin/arm-none-eabi-g++",
-                "CMAKE_ASM_COMPILER": "/usr/bin/arm-none-eabi-gcc",
-                "DRY_RUN": "ON",
+                "CMAKE_C_STANDARD": "11",
+                "CMAKE_CXX_STANDARD": "20",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "LOGGER_TYPE": "hydrolib"
+            }
+        },
+        {
+            "name": "host",
+            "hidden": true,
+            "inherits": "default"
+        },
+        {
+            "name": "target",
+            "hidden": true,
+            "inherits": "default",
+            "cacheVariables": {
                 "BUILD_TESTING": "OFF"
             }
         },
         {
-            "name": "tests",
-            "displayName": "Building tests",
-            "description": "Building tests",
-            "binaryDir": "${sourceDir}/build",
+            "name": "F4",
+            "inherits": "target",
+            "hidden": true,
+            "toolchainFile": "${sourceDir}/resources/gcc-arm-none-eabi-f4.cmake",
             "cacheVariables": {
-                "DRY_RUN": "OFF",
-                "BUILD_TESTING": "ON"
+                "CMAKE_C_FLAGS": "-DSTM32F407xx",
+                "CMAKE_CXX_FLAGS": "-DSTM32F407xx",
+                "MCU_FAMILY": "F4"
             }
+        },
+        {
+            "name": "F1",
+            "inherits": "target",
+            "hidden": true,
+            "toolchainFile": "${sourceDir}/resources/gcc-arm-none-eabi-f1.cmake",
+            "cacheVariables": {
+                "CMAKE_C_FLAGS": "-DSTM32F103xB",
+                "CMAKE_CXX_FLAGS": "-DSTM32F103xB",
+                "MCU_FAMILY": "F1"
+            }
+        },
+        {
+            "name": "Debug",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "BUILD_TESTS": "ON",
+                "HYDRV_BUILD_EXAMPLES": "ON"
+            }
+        },
+        {
+            "name": "RelWithDebInfo",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+            }
+        },
+        {
+            "name": "Release",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "MinSizeRel",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "MinSizeRel"
+            }
+        },
+        {
+            "name": "DebugF4",
+            "inherits": "F4",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "HYDRV_BUILD_EXAMPLES": "ON"
+            }
+        },
+        {
+            "name": "DebugF1",
+            "inherits": "F1",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "HYDRV_BUILD_EXAMPLES": "ON"
+            }
+        },
+        {
+            "name": "Testing",
+            "inherits": "host",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "BUILD_TESTS": "ON"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "Debug",
+            "configurePreset": "Debug"
+        },
+        {
+            "name": "RelWithDebInfo",
+            "configurePreset": "RelWithDebInfo"
+        },
+        {
+            "name": "Release",
+            "configurePreset": "Release"
+        },
+        {
+            "name": "MinSizeRel",
+            "configurePreset": "MinSizeRel"
         }
     ]
 }
